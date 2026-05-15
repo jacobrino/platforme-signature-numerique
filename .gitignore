@@ -3,3 +3,4 @@
 *.pdf
 *.sig
 mon_env/*
+docs/*
