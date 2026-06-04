@@ -3,6 +3,8 @@
 *.pdf
 *.sig
 env/*
+env/
+
 docs/*
 .env
 
