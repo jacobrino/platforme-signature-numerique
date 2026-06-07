@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    'core',
+
+
 ]
 
 SITE_ID = 1
@@ -136,11 +139,20 @@ STATIC_URL = 'static/'
 
 
 
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = "mandatory"
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_USERNAME_REQUIRED = False
+# ACCOUNT_EMAIL_REQUIRED = True
+#Deprecier
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 
+ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+ACCOUNT_AUTHENTICATION_METHOD ='email'
+
+# ACCOUNT_USERNAME_REQUIRED = False
+#Deprecied
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+
+
+SITE_DOMAIN = os.getenv("SITE_DOMAIN", default="localhost:8000")
+SITE_NAME = os.getenv("SITE_NAME", default="My Site")
 
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
 EMAIL_HOST = os.getenv("EMAIL_HOST")
