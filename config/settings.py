@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.site_name',
             ],
         },
     },
@@ -137,7 +138,14 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
 
+LOGIN_REDIRECT_URL = "/test"
+LOGOUT_REDIRECT_URL = "/accounts/login"
+ACCOUNT_LOGOUT_ON_GET = True
 
 # ACCOUNT_EMAIL_REQUIRED = True
 #Deprecier
@@ -150,6 +158,9 @@ ACCOUNT_AUTHENTICATION_METHOD ='email'
 #Deprecied
 ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 
+ACCOUNT_LOGGING = True
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
 SITE_DOMAIN = os.getenv("SITE_DOMAIN", default="localhost:8000")
 SITE_NAME = os.getenv("SITE_NAME", default="My Site")

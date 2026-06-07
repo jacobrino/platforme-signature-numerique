@@ -1,0 +1,29 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Test page{% endblock %}
+
+{% block content %}
+
+<h1>Page de test Django</h1>
+
+{% if user.is_authenticated %}
+    <p>✅ Vous êtes connecté</p>
+    <p>Email : {{ user.email }}</p>
+
+    <a href="/accounts/logout/">Se déconnecter</a>
+{% else %}
+    <p>❌ Vous n'êtes pas connecté</p>
+
+    <a href="/accounts/login/">Se connecter</a>
+    <a href="/accounts/signup/">Créer un compte</a>
+{% endif %}
+
+<hr>
+
+<h3>Debug info</h3>
+<p>User ID : {{ user.id }}</p>
+<p>Authenticated : {{ user.is_authenticated }}</p>
+
+{% endblock %}

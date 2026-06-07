@@ -17,11 +17,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
+from django.shortcuts import render
+
+
+def test_view(request):
+    return render(request, "test.html")
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('allauth.urls')),
+
+    # path('', include('allauth.urls')),
+    # path('auth/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
+
+
+    # path('', RedirectView.as_view(url='account/login/', permanent=False), name='index'),
+
     #Importer les authentifications view et controller.
 
     # login propre
@@ -30,6 +42,9 @@ urlpatterns = [
     # path('logout/', RedirectView.as_view(url='/auth/logout/')),
 
     # path('auth/', include('allauth.urls')),
+
+    path('test/', test_view, name='test'),
+
 
 ]
 
