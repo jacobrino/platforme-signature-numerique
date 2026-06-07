@@ -3,8 +3,10 @@
 *.pdf
 *.sig
 env/*
-env/
-
+env
 docs/*
 .env
-
+README.md
+__pycache__
+__pycache__/*
+*.pyc
