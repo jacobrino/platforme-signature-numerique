@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}Vérification de votre email{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+
+        <div class="card shadow border-0">
+            <div class="card-body p-5 text-center">
+
+                <!-- Icon -->
+                <div class="mb-3">
+                    <i class="fa-solid fa-paper-plane text-primary" style="font-size: 48px;"></i>
+                </div>
+
+                <h2 class="fw-bold mb-3">
+                    Vérification de votre compte
+                </h2>
+
+                
+
+                <hr class="my-4">
+
+                <h5 class="mb-3">
+                    <i class="fa-solid fa-list-check me-1 text-success"></i>
+                    Prochaines étapes
+                </h5>
+
+                <div class="text-start">
+
+                    <p>
+                        <i class="fa-solid fa-inbox me-2 text-secondary"></i>
+                        Ouvrez votre boîte mail
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-link me-2 text-secondary"></i>
+                        Cliquez sur le lien de confirmation
+                    </p>
+
+                    <p>
+                        <i class="fa-solid fa-right-to-bracket me-2 text-secondary"></i>
+                        Revenez ici pour vous connecter
+                    </p>
+
+                </div>
+
+                <div class="alert alert-warning mt-4 text-start">
+                    <i class="fa-solid fa-triangle-exclamation me-1"></i>
+                    <strong>Vous ne trouvez pas l'email ?</strong><br>
+                    Vérifiez vos spams ou courriers indésirables.
+                </div>
+
+                <div class="mt-4 d-grid gap-2">
+
+                    <a href="/accounts/login/" class="btn btn-primary">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>
+                        Aller à la connexion
+                    </a>
+
+                    <!-- <a href="/accounts/email/" class="btn btn-outline-secondary">
+                        <i class="fa-solid fa-rotate me-1"></i>
+                        Renvoyer l'email
+                    </a> -->
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
