@@ -44,6 +44,7 @@ urlpatterns = [
     # path('auth/', include('allauth.urls')),
 
     path('test/', test_view, name='test'),
+    path('i18n/', include('django.conf.urls.i18n')), #Pour faire fonctionner la langue
 
 
 ]

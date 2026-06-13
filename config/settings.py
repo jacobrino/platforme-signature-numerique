@@ -9,15 +9,20 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
+from django.utils.translation import gettext_lazy as _
 
 from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+
 load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "locale"),
+]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -57,6 +62,10 @@ SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
+    
+    # IMPORTANT
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -120,6 +129,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGE_CODE = "fr"
+
+LANGUAGES = [
+    ("fr", _("Fr")),
+    ("en", _("En")),
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
@@ -161,6 +176,13 @@ ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
 ACCOUNT_LOGGING = True
 
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+ACCOUNT_FORMS = {
+    "reset_password": "core.forms.CustomResetPasswordForm",
+    "login": "core.forms.CustomLoginForm",
+    "signup": "core.forms.CustomSignupForm",
+
+}
 
 SITE_DOMAIN = os.getenv("SITE_DOMAIN", default="localhost:8000")
 SITE_NAME = os.getenv("SITE_NAME", default="My Site")
