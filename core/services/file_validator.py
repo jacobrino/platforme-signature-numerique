@@ -12,11 +12,10 @@ SUPPORTED_EXTENSIONS = {
     ".docx",
     ".xlsx",
     ".pptx",
-    
+
     ".pdf"
 
-    # ".dll",
-    # ".sys",
+
     # ".pdf",
     # ".png",
     # ".docx",
