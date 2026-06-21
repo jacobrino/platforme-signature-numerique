@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+Vérification de fichier - {{ SITE_NAME }}
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-sm">
+                <div class="card-body text-center p-5">
+                    <i class="fas fa-file-circle-check fa-4x text-success mb-4"></i>
+                    <h1 class="h3 mb-3">
+                        Vérification d'un fichier signé
+                    </h1>
+                    <p class="text-muted mb-4">
+                        Importez un fichier signé numériquement afin de vérifier
+                        son authenticité et son intégrité.
+                    </p>
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <input 
+                                class="form-control"
+                                type="file"
+                                name="file"
+                                required
+                            >
+                        </div>
+                        <button 
+                            type="submit"
+                            class="btn btn-success btn-lg"
+                            onclick="clearVerificationResult()"
+                        >
+                            <i class="fas fa-shield-halved"></i>
+                            Vérifier le fichier
+
+                        </button>
+                    </form>
+                    {% if verification_result %}
+                        <div id="verification-result" class="card shadow-sm mt-5">
+
+                            <!-- HEADER -->
+                            <div class="card-header
+                                {% if verification_result.status == 'VALID' %}
+                                    bg-success text-white
+                                {% elif verification_result.status == 'UNTRUSTED' %}
+                                    bg-warning
+                                {% else %}
+                                    bg-danger text-white
+                                {% endif %}
+                            ">
+                                {% if verification_result.status == "VALID" %}
+                                    <i class="fas fa-circle-check"></i>
+                                    Signature valide
+                                {% elif verification_result.status == "UNTRUSTED" %}
+                                    <i class="fas fa-triangle-exclamation"></i>
+                                    Signature non approuvée
+                                {% else %}
+                                    <i class="fas fa-circle-xmark"></i>
+                                    Signature invalide
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <!-- Informations fichier -->
+                                <h5>
+                                    <i class="fas fa-file"></i>
+                                    Informations fichier
+                                </h5>
+                                <p>
+                                    Nom :
+                                    <strong>
+                                        {{ verification_result.file_name }}
+                                    </strong>
+                                </p>
+                                <hr>
+                                <!-- Certificat -->
+                                <h5>
+                                    <i class="fas fa-certificate"></i>
+                                    Certificat
+                                </h5>
+                                <p>
+                                    Signataire :
+                                    <strong>
+                                        {{ verification_result.certificate.subject }}
+                                    </strong>
+                                </p>
+                                <p>
+                                    Expiration :
+                                    {{ verification_result.certificate.expiration }}
+                                </p>
+                                <p>
+                                    Certificat :
+                                    {% if verification_result.certificate.trusted %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-certificate"></i>
+                                            Reconnu
+                                        </span>
+                                    {% elif verification_result.certificate.self_signed %}
+                                        <span class="badge bg-warning text-dark">
+                                            <i class="fas fa-triangle-exclamation"></i>
+                                            Auto-signé
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-ban"></i>
+                                            Non reconnu
+                                        </span>
+                                    {% endif %}
+                                </p>
+                                <hr>
+                                <!-- Signature -->
+                                <h5>
+                                    <i class="fas fa-signature"></i>
+                                    Signature numérique
+                                </h5>
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        Présence de signature :
+                                        {% if verification_result.signature.exists %}
+                                            <i class="fas fa-circle-check text-success"></i>
+                                        {% else %}
+                                            <i class="fas fa-circle-xmark text-danger"></i>
+                                        {% endif %}
+                                    </li>
+                                    <li class="list-group-item">
+                                        Intégrité du fichier :
+                                        {% if verification_result.signature.integrity %}
+                                            <i class="fas fa-circle-check text-success"></i>
+                                        {% else %}
+                                            <i class="fas fa-circle-xmark text-danger"></i>
+                                        {% endif %}
+                                    </li>
+                                    <li class="list-group-item">
+                                        Algorithme :
+                                        <strong>
+                                            {{ verification_result.signature.algorithm }}
+                                        </strong>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Date de signature :
+                                        {{ verification_result.signature.signing_time }}
+                                    </li>
+                                </ul>
+                                <hr>
+                                <!-- Message erreur / information -->
+                                {% if verification_result.error %}
+                                    <div class="alert alert-warning mt-3">
+                                        <i class="fas fa-info-circle"></i>
+                                        {{ verification_result.error }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+function clearVerificationResult() {
+    const result = document.getElementById(
+        "verification-result"
+    );
+    if (result) {
+        result.remove();
+    }
+}
+</script>
+
+{% endblock %}

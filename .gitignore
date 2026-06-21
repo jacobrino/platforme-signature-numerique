@@ -10,3 +10,7 @@ README.md
 __pycache__
 __pycache__/*
 *.pyc
+*.dll
+*.exe
+*.pdf
+

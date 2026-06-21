@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+Plateforme Signature Numérique
+{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="py-5 bg-light border-bottom">
+    <div class="container text-center">
+
+        <h1 class="display-4 fw-bold">
+            Signature Numérique Sécurisée
+        </h1>
+
+        <p class="lead text-muted mt-3">
+            Signez vos documents avec une identité cryptographique et
+            vérifiez instantanément l'authenticité de vos fichiers signés.
+        </p>
+
+        <!-- <div class="mt-4">
+            <a href="/accounts/signup/" class="btn btn-primary btn-lg me-2">
+                Créer un compte
+            </a>
+
+            <a href="/accounts/login/" class="btn btn-outline-secondary btn-lg">
+                Se connecter
+            </a>
+        </div> -->
+
+        <div class="mt-4">
+
+            <a href="/verify/" class="btn btn-success btn-lg me-2">
+                <i class="fas fa-shield-halved"></i>
+                Vérifier un fichier
+            </a>
+
+            <a href="/accounts/signup/" class="btn btn-primary btn-lg me-2">
+                <i class="fas fa-user-plus"></i>
+                Créer un compte
+            </a>
+
+            <a href="/accounts/login/" class="btn btn-outline-secondary btn-lg">
+                <i class="fas fa-right-to-bracket"></i>
+                Se connecter
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- FONCTIONNALITES -->
+<section class="py-5">
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+            Fonctionnalités principales
+        </h2>
+
+        <div class="row g-4">
+
+
+            <!-- Signature -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+
+                        <i class="fas fa-signature fa-3x text-primary mb-3"></i>
+
+                        <h5 class="card-title">
+                            Signature numérique
+                        </h5>
+
+                        <p class="card-text">
+                            Signez vos documents avec une identité cryptographique
+                            basée sur des mécanismes de signature numérique.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Vérification -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+
+                        <i class="fas fa-file-circle-check fa-3x text-success mb-3"></i>
+
+                        <h5 class="card-title">
+                            Vérification instantanée
+                        </h5>
+
+                        <p class="card-text">
+                            Vérifiez gratuitement l'authenticité et l'intégrité
+                            d'un fichier signé sans créer de compte.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Sécurité -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body text-center">
+
+                        <i class="fas fa-shield-halved fa-3x text-danger mb-3"></i>
+
+                        <h5 class="card-title">
+                            Sécurité avancée
+                        </h5>
+
+                        <p class="card-text">
+                            Gérez les preuves cryptographiques et renforcez
+                            la non-répudiation de vos documents.
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- COMMENT CA MARCHE -->
+<section class="py-5 bg-light">
+    <div class="container">
+
+        <h2 class="text-center mb-5">
+            Comment ça fonctionne ?
+        </h2>
+
+        <div class="row text-center">
+
+
+            <div class="col-md-3">
+                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                <h5>Créer un compte</h5>
+                <p>
+                    Créez votre identité numérique sécurisée.
+                </p>
+            </div>
+
+
+            <div class="col-md-3">
+                <i class="fas fa-file-arrow-up fa-3x text-success mb-3"></i>
+                <h5>Importer un fichier</h5>
+                <p>
+                    Ajoutez votre document à signer.
+                </p>
+            </div>
+
+
+            <div class="col-md-3">
+                <i class="fas fa-pen-nib fa-3x text-warning mb-3"></i>
+                <h5>Signer</h5>
+                <p>
+                    Appliquez une signature numérique au fichier.
+                </p>
+            </div>
+
+
+            <div class="col-md-3">
+                <i class="fas fa-circle-check fa-3x text-info mb-3"></i>
+                <h5>Vérifier</h5>
+                <p>
+                    Contrôlez l'authenticité et l'intégrité.
+                </p>
+            </div>
+
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- APPEL A L'ACTION -->
+<section class="py-5">
+    <div class="container text-center">
+
+        <h2>
+            Sécurisez vos documents dès maintenant
+        </h2>
+
+        <p class="text-muted">
+            Une plateforme dédiée à la signature numérique et
+            à la vérification cryptographique.
+        </p>
+
+        <a href="/accounts/signup/" class="btn btn-success btn-lg">
+            Créer gratuitement un compte
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}

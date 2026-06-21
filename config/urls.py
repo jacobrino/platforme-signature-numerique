@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 from django.shortcuts import render
+from core.views import welcome_view
+from django.contrib.auth.decorators import login_required
+from core.views import verify_file
 
-
+@login_required
 def test_view(request):
     return render(request, "test.html")
 
@@ -45,6 +48,13 @@ urlpatterns = [
 
     path('test/', test_view, name='test'),
     path('i18n/', include('django.conf.urls.i18n')), #Pour faire fonctionner la langue
+
+
+    path('verify/', verify_file, name='verify'),
+
+    path('', welcome_view, name='welcome'),
+
+
 
 
 ]
