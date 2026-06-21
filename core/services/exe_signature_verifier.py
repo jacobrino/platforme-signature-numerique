@@ -146,11 +146,6 @@ def verify_exe_signature(file_path):
                 result["error"] = (
                     "Signature valide mais certificat auto-signé."
                 )
-            # Tout est valide
-            elif result["signature"]["integrity"]:
-                print("ICI elif tout est valide")
-                result["status"] = "VALID"
-                result["certificate"]["trusted"] = True
 
             # Certificat intermédiaire/racine absent
             elif "unable to get local issuer certificate" in output:
@@ -160,6 +155,11 @@ def verify_exe_signature(file_path):
                     "Signature valide mais chaîne de certification "
                     "non vérifiée."
                 )
+            # Tout est valide
+            elif result["signature"]["integrity"]:
+                print("ICI elif tout est valide")
+                result["status"] = "VALID"
+                result["certificate"]["trusted"] = True
             
         else:
             result["status"] = "INVALID"
