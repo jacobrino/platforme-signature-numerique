@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}
+Plateforme Signature Numérique - Vérification
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <h2>
+        <i class="fa-solid fa-shield-halved"></i>
+        Vérification signature numérique
+    </h2>
+
+    {% if verification_result %}
+
+        <div class="alert 
+            {% if verification_result.status == 'VALID' %}
+                alert-success
+            {% else %}
+                alert-danger
+            {% endif %}
+            mt-4">
+
+            {% if verification_result.status == "VALID" %}
+
+                <i class="fa-solid fa-circle-check"></i>
+                <strong>
+                    Signature valide
+                </strong>
+
+            {% else %}
+
+                <i class="fa-solid fa-circle-xmark"></i>
+                <strong>
+                    Signature invalide
+                </strong>
+
+            {% endif %}
+
+            {% if verification_result.error %}
+                <br>
+                {{ verification_result.error }}
+            {% endif %}
+
+        </div>
+
+
+        <div class="card shadow-sm mt-4">
+            <div class="card-body">
+                <h5>
+                    <i class="fa-solid fa-certificate"></i>
+                    Certificat
+                </h5>
+                <p>
+                    Signataire :
+                    <strong>
+                        {{ verification_result.certificate.subject }}
+                    </strong>
+                </p>
+                <p>
+                    Certificat auto-signé :
+                    {% if verification_result.certificate.self_signed %}
+                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                    {% else %}
+                        <i class="fa-solid fa-circle-check text-success"></i> Non
+                    {% endif %}
+                </p>
+                <hr>
+                <h5>
+                    <i class="fa-solid fa-lock"></i>
+                    Sécurité
+                </h5>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        Signature présente :
+                        {% if verification_result.signature.exists %}
+                            <i class="fa-solid fa-circle-check text-success"></i>
+                        {% else %}
+                            <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        {% endif %}
+                    </li>
+                    <li class="list-group-item">
+                        Intégrité du fichier :
+                        {% if verification_result.signature.integrity %}
+                            <i class="fa-solid fa-circle-check text-success"></i>
+                        {% else %}
+                            <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="mt-4">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">
+                <i class="fa-solid fa-file"></i>
+                Document original
+            </label>
+            <input
+                type="file"
+                name="file"
+                class="form-control"
+                required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">
+                <i class="fa-solid fa-file-signature"></i>
+                Fichier signature (.sig)
+            </label>
+            <input
+                type="file"
+                name="signature"
+                class="form-control"
+                required>
+        </div>
+        <button class="btn btn-success">
+            <i class="fa-solid fa-check"></i>
+            Vérifier la signature
+
+        </button>
+    </form>
+</div>
+
+{% endblock %}

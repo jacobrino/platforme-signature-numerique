@@ -184,6 +184,25 @@ ACCOUNT_FORMS = {
 
 }
 
+CMS_CERTIFICATE = (
+    BASE_DIR /
+    "certificates" /
+    "demo_cert.pem"
+)
+CMS_PRIVATE_KEY = (
+    BASE_DIR /
+    "certificates" /
+    "demo_private_key.pem"
+)
+
+# openssl ecparam -name secp384r1 -genkey -noout -out certificates/demo_private_key.pem
+
+# openssl req -new -x509 \
+# -key certificates/demo_private_key.pem \
+# -out certificates/demo_cert.pem \
+# -days 365 \
+# -subj "/C=FR/O=JCT/CN=JCT Signature ECDSA"
+
 SITE_DOMAIN = os.getenv("SITE_DOMAIN", default="localhost:8000")
 SITE_NAME = os.getenv("SITE_NAME", default="My Site")
 

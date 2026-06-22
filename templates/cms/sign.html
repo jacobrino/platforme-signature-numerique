@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+Plateforme Signature Numérique - Signer
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+<h2>
+    <i class="fa-solid fa-file-signature"></i>
+    Simulation signature numérique
+</h2>
+
+{% if result %}
+
+<div class="alert 
+    {% if result.status == 'SUCCESS' %}
+        alert-success
+    {% else %}
+        alert-danger
+    {% endif %}
+    mt-4">
+    {% if result.status == "SUCCESS" %}
+        <i class="fa-solid fa-circle-check"></i>
+        <strong>Signature créée avec succès.</strong>
+        <br><br>
+        Le fichier signé est :
+        <strong>
+            {{ result.signature_file }}
+        </strong>
+        <br>
+        Vous pouvez maintenant conserver :
+        <ul>
+            <li>Le fichier original</li>
+            <li>Le fichier de signature (.sig)</li>
+        </ul>
+    {% else %}
+        <i class="fa-solid fa-circle-xmark"></i>
+        <strong>Échec de la signature.</strong>
+        <br>
+        {{ result.message }}
+    {% endif %}
+</div>
+{% endif %}
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<div class="mb-3">
+<label class="form-label">
+    <i class="fa-solid fa-file"></i>
+    Choisir un fichier à signer
+</label>
+<input 
+    type="file"
+    name="file"
+    class="form-control"
+    required>
+</div>
+<button class="btn btn-primary">
+<i class="fa-solid fa-signature"></i>
+Signer le fichier
+</button>
+</form>
+</div>
+{% endblock %}

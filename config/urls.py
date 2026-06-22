@@ -21,6 +21,11 @@ from django.shortcuts import render
 from core.views import welcome_view
 from django.contrib.auth.decorators import login_required
 from core.views import verify_file
+from core.views import sign_view
+from core.views import cms_sign_view
+from core.views import cms_verify_view
+
+
 
 @login_required
 def test_view(request):
@@ -51,6 +56,14 @@ urlpatterns = [
 
 
     path('verify/', verify_file, name='verify'),
+
+    path("sign/",sign_view,name="sign"),
+
+    path(
+        "cms/sign/",cms_sign_view,name="cms_sign"
+    ),
+    path("cms/verify/",cms_verify_view,name="cms_verify"
+    ),
 
     path('', welcome_view, name='welcome'),
 
