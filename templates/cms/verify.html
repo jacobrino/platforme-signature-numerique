@@ -62,9 +62,9 @@ Plateforme Signature Numérique - Vérification
                 <p>
                     Certificat auto-signé :
                     {% if verification_result.certificate.self_signed %}
-                        <i class="fa-solid fa-circle-xmark text-danger"></i>
+                        <i class="fa-solid fa-circle-check text-success"></i>
                     {% else %}
-                        <i class="fa-solid fa-circle-check text-success"></i> Non
+                        <i class="fa-solid fa-circle-xmark text-danger"></i> Non
                     {% endif %}
                 </p>
                 <hr>
