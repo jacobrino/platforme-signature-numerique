@@ -1,0 +1,5 @@
+{% extends "account/email/base_message.txt" %}
+{% load i18n %}{% block content %}{% autoescape off %}{% blocktranslate %}Vous recevez cet email parce que vous, ou quelqu’un d’autre, avez essayé d’accéder à un compte avec l’adresse email {{ email }}.
+Cependant, nous n’avons aucun enregistrement d’un tel compte dans notre base de données.
+{% endblocktranslate %}{% blocktranslate %}Vous pouvez ignorer cet email en toute sécurité si vous n’êtes pas à l’origine de cette action.{% endblocktranslate %}
+{% blocktranslate %}Si c’était bien vous, vous pouvez créer un compte en utilisant le lien ci-dessous.{% endblocktranslate %}{{ signup_url }}{% endautoescape %}{% endblock content %}

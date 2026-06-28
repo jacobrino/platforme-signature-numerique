@@ -1,0 +1,16 @@
+⚙️ 1. Générer les fichiers de traduction
+
+django-admin makemessages -l fr
+django-admin makemessages -l en
+
+    Puis tu modifies :
+        locale/fr/LC_MESSAGES/django.po
+        locale/en/LC_MESSAGES/django.po
+    Exemple :
+        msgid "Password Reset"
+        msgstr "Réinitialisation du mot de passe"
+🔄 2. Compiler les traductions(obligatoire)
+    django-admin compilemessages
+🌐 3. Ajouter un switch de langue (très important)
+    Dans ton template base :
+    {% load i18n %}

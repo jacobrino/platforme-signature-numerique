@@ -1,0 +1,13 @@
+Bonjour,
+
+Merci de votre inscription.
+
+Afin de confirmer votre adresse e-mail et d'activer votre compte, veuillez cliquer sur le lien suivant :
+
+{{ activate_url }}
+
+Si vous n'êtes pas à l'origine de cette demande, vous pouvez ignorer cet e-mail.
+
+Cordialement,
+
+L'équipe {{ current_site.name }}
